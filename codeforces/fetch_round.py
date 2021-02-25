@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 options = Options()
 options.headless = True
-PATH ="C:\Program Files (x86)\chromedriver.exe"
+PATH ="../chromedriver.exe"
 driver = webdriver.Chrome(PATH,options=options)
 print("Using chromedriver in headless option")
 link     = "https://codeforces.com/contest/"+sys.argv[1]

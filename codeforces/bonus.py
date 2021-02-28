@@ -63,7 +63,7 @@ while(j !=0):
  for i in range(1,len(tr)):
         td = tr[i].find_element_by_tag_name("td")
         part = td.text
-        print(part)
+        
         
         os.mkdir(part)
         os.chdir("./"+td.text)

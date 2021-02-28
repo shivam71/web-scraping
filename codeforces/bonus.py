@@ -13,8 +13,8 @@ options.headless = True
 PATH ="../chromedriver.exe"
 driver = webdriver.Chrome(PATH,options=options)
 print("Using chromedriver in headless option")
-link = "https://codeforces.com/contests"
-driver.get(link)
+link_home = "https://codeforces.com/contests"
+driver.get(link_home)
 contest_table = driver.find_element_by_class_name("contests-table")
 data_table = driver.find_element_by_class_name("datatable")
 table = contest_table.find_element_by_tag_name("table")
@@ -23,14 +23,31 @@ next_page = driver.find_element_by_link_text("→")
 
 
 list_hrefs = [contests_links[i].get_attribute("href")  for i in range(len(contests_links))]
+
 last_x= int(sys.argv[1])
 #body = driver.find_element_by_tag_name("body")
 #div_body = body.find_element_by_id("body")
 #div__which_has_table = div_body.find_elements_by_tag_name("div")[3]
 #page_content = div__which_has_table.find_elements_by_tag_name("div")[1]
-for i in range(last_x):
+k = 0
+j = last_x
+while(j !=0):
     #if last_x <= len(contest_links):
- driver.get(list_hrefs[i])
+ if k > len(list_hrefs):
+     k = 0 
+     driver.get(link_home)
+     next_page = driver.find_element_by_link_text("→")
+     next_page.click()
+     contest_table = driver.find_element_by_class_name("contests-table")
+     data_table = driver.find_element_by_class_name("datatable")
+     table = contest_table.find_element_by_tag_name("table")
+     contests_links = table.find_elements_by_link_text("Enter »")
+     next_page = driver.find_element_by_link_text("→")
+     list_hrefs = [contests_links[f].get_attribute("href")  for f in range(len(contests_links))]
+
+     # change page 
+
+ driver.get(list_hrefs[k])
 
  contest_number=driver.current_url.split("/")[4]
 
@@ -46,6 +63,7 @@ for i in range(last_x):
  for i in range(1,len(tr)):
         td = tr[i].find_element_by_tag_name("td")
         part = td.text
+        print(part)
         
         os.mkdir(part)
         os.chdir("./"+td.text)
@@ -86,6 +104,8 @@ for i in range(last_x):
         tbody = table.find_element_by_tag_name("tbody")
         tr = tbody.find_elements_by_tag_name("tr")
  os.chdir("..")  
+ k+=1
+ j-=1
   #else:
      #   if i>len(contest_links):
            # next_page = driver.find_element_by_link_text("→")

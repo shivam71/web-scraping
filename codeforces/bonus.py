@@ -25,15 +25,12 @@ next_page = driver.find_element_by_link_text("→")
 list_hrefs = [contests_links[i].get_attribute("href")  for i in range(len(contests_links))]
 
 last_x= int(sys.argv[1])
-#body = driver.find_element_by_tag_name("body")
-#div_body = body.find_element_by_id("body")
-#div__which_has_table = div_body.find_elements_by_tag_name("div")[3]
-#page_content = div__which_has_table.find_elements_by_tag_name("div")[1]
+
 k = 0
 j = last_x
 while(j !=0):
-    #if last_x <= len(contest_links):
- if k > len(list_hrefs):
+    
+ if k > len(list_hrefs):# if page change required 
      k = 0 
      driver.get(link_home)
      next_page = driver.find_element_by_link_text("→")
@@ -45,7 +42,7 @@ while(j !=0):
      next_page = driver.find_element_by_link_text("→")
      list_hrefs = [contests_links[f].get_attribute("href")  for f in range(len(contests_links))]
 
-     # change page 
+     
 
  driver.get(list_hrefs[k])
 
@@ -106,15 +103,10 @@ while(j !=0):
  os.chdir("..")  
  k+=1
  j-=1
-  #else:
-     #   if i>len(contest_links):
-           # next_page = driver.find_element_by_link_text("→")
-           # next_page.click()
-           # contest_table = driver.find_element_by_class_name("contests-table")
-           # data_table = driver.find_element_by_class_name("datatable")
-           # table = contest_table.find_element_by_tag_name("table")
-           # contests_links = table.find_elements_by_link_text("Enter »")
-           # next_page = driver.find_element_by_link_text("→")
+time.sleep(10)
+print("completed")
+driver.quit()
+ 
 
         
 
